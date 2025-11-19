@@ -231,12 +231,66 @@
 
 <script src="https://unpkg.com/reveal.js@4/dist/reveal.js"></script>
 <script>
+  // Фиксированный размер слайда и отключение авто-масштабирования
   Reveal.initialize({
+    width: 960,          // фиксированная ширина
+    height: 540,         // фиксированная высота
+    margin: 0,           // нет отступа вокруг слайда
+    minScale: 1,
+    maxScale: 1,         // запретить авто-подстройку масштаба
     hash: true,
     slideNumber: true,
-    center: true,
-    transition: 'slide'
+    center: false,       // опционально: не центрировать к содержимому
+    transition: 'slide',
+    touch: false         // отключить свайп‑навигацию (частично)
   });
+
+  // Блокировка прокрутки между слайдами (колёсико/свайп),
+  // но разрешаем прокрутку внутри элементов с overflow
+  (function () {
+    const reveal = document.querySelector('.reveal');
+
+    function isScrollable(el, deltaY) {
+      while (el && el !== document.body) {
+        const style = getComputedStyle(el);
+        const overflowY = style.overflowY;
+        if ((overflowY === 'auto' || overflowY === 'scroll') && el.scrollHeight > el.clientHeight) {
+          if ((deltaY > 0 && el.scrollTop + el.clientHeight < el.scrollHeight) ||
+              (deltaY < 0 && el.scrollTop > 0)) {
+            return true;
+          }
+        }
+        el = el.parentElement;
+      }
+      return false;
+    }
+
+    document.addEventListener('wheel', function (e) {
+      if (!reveal) return;
+      if (isScrollable(e.target, e.deltaY)) return; // позволяем внутр. прокрутку
+      if (reveal.contains(e.target)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, { passive: false, capture: true });
+
+    // touch: аналогично для тач‑перетаскивания
+    let touchStartY = 0;
+    document.addEventListener('touchstart', function (e) {
+      if (e.touches && e.touches[0]) touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', function (e) {
+      if (!reveal || !e.touches || !e.touches[0]) return;
+      const touchY = e.touches[0].clientY;
+      const deltaY = touchStartY - touchY;
+      if (isScrollable(e.target, deltaY)) return;
+      if (reveal.contains(e.target)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, { passive: false, capture: true });
+  })();
 </script>
 </body>
 </html>
