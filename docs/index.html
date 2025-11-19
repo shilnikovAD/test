@@ -1,190 +1,13 @@
-<!doctype html>
 <html lang="ru">
+<!-- language: html -->
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MovieCatalog — Этап 1: Презентация</title>
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@4/dist/reveal.css">
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@4/dist/theme/black.css" id="theme">
-  <style>
-    /* Theme Variables */
-    :root {
-      --font-family-display: Arial, sans-serif;
-      --font-weight-display: 600;
-      --font-family-content: Arial, sans-serif;
-      --font-weight-content: 400;
-      --font-size-content: 16px;
-      --line-height-content: 1.4;
-    }
+  <link rel="stylesheet" href="style.css">
 
-    /* DARK THEME */
-    body.theme-dark {
-      --color-bg-base: #0f172a;
-      --color-bg-elevated: #020617;
-      --color-bg-surface: #1e293b;
-      --color-bg-muted: #334155;
-      --color-text-primary: #f1f5f9;
-      --color-text-secondary: #cbd5e1;
-      --color-text-muted: #94a3b8;
-      --color-text-accent: #38bdf8;
-      --color-primary: #38bdf8;
-      --color-primary-foreground: #0f172a;
-    }
-
-    /* Base Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: var(--font-family-content);
-      font-weight: var(--font-weight-content);
-      font-size: var(--font-size-content);
-      line-height: var(--line-height-content);
-      overflow-x: hidden;
-    }
-
-    /* Slide Container */
-    .slide {
-      width: 960px;
-      height: 540px;
-      margin: 0 auto 20px;
-      display: flex;
-      flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Layout Utilities */
-    .row { flex-direction: row; }
-    .col { flex-direction: column; }
-    .center {
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .space-between { justify-content: space-between; }
-    .items-center { align-items: center; }
-    .items-start { align-items: flex-start; }
-    .fill-width { flex: 1; }
-    .fill-height { flex: 1; display: flex; flex-direction: column; }
-
-    /* Spacing */
-    .gap-sm { gap: 0.5rem; }
-    .gap-md { gap: 1rem; }
-    .gap-lg { gap: 1.5rem; }
-    .gap-xl { gap: 2rem; }
-
-    .p-4 { padding: 1rem; }
-    .p-6 { padding: 1.5rem; }
-    .p-8 { padding: 2rem; }
-    .p-12 { padding: 3rem; }
-    .p-16 { padding: 4rem; }
-
-    .mb-2 { margin-bottom: 0.5rem; }
-    .mb-4 { margin-bottom: 1rem; }
-    .mb-6 { margin-bottom: 1.5rem; }
-    .mb-8 { margin-bottom: 2rem; }
-    .mt-4 { margin-top: 1rem; }
-    .mt-6 { margin-top: 1.5rem; }
-    .mt-8 { margin-top: 2rem; }
-
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-family-display);
-      font-weight: var(--font-weight-display);
-      line-height: 1.2;
-      margin: 0;
-    }
-
-    h1 { font-size: 3rem; }
-    h2 { font-size: 2.25rem; }
-    h3 { font-size: 1.75rem; }
-    h4 { font-size: 1.5rem; }
-
-    .text-xl { font-size: 1.25rem; }
-    .text-lg { font-size: 1.125rem; }
-    .text-base { font-size: 1rem; }
-    .text-sm { font-size: 0.875rem; }
-
-    .font-bold { font-weight: 700; }
-    .font-semibold { font-weight: 600; }
-    .text-center { text-align: center; }
-    .text-left { text-align: left; }
-
-    .opacity-80 { opacity: 0.8; }
-    .opacity-70 { opacity: 0.7; }
-
-    /* Lists */
-    ul, ol {
-      margin-left: 2rem;
-      line-height: 1.8;
-    }
-
-    ul li { list-style: disc; }
-    ol li { list-style: decimal; }
-
-    li { margin-bottom: 0.75rem; }
-    li:last-child { margin-bottom: 0; }
-
-    /* Card Styles */
-    .card-rect {
-      padding: 2rem;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Custom Reveal.js overrides */
-    .reveal {
-      font-family: var(--font-family-content);
-    }
-
-    .reveal h1, .reveal h2, .reveal h3 {
-      text-transform: none;
-    }
-
-    .reveal pre {
-      font-size: 0.65em;
-      line-height: 1.4;
-      background: #1e293b;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .reveal code {
-      font-family: 'Courier New', monospace;
-      color: #38bdf8;
-    }
-
-    .reveal ul, .reveal ol {
-      text-align: left;
-    }
-
-    .emoji {
-      font-style: normal;
-      font-size: 1.2em;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    .feature-box {
-      background: #1e293b;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .feature-box h4 {
-      color: #38bdf8;
-      margin-bottom: 0.75rem;
-    }
-  </style>
 </head>
 <body class="theme-dark">
 <div class="reveal">
@@ -194,7 +17,6 @@
     <section class="slide p-16 col center" style="background-color: #020617; color: #f1f5f9;">
       <h1 class="mb-4" style="color: #38bdf8;">MovieCatalog</h1>
       <p class="text-xl" style="color: #cbd5e1;">Этап 1: Проектирование и защита идеи</p>
-      <p class="text-sm mt-8" style="color: #94a3b8;">Презентация проекта</p>
     </section>
 
     <!-- Problem Statement -->
@@ -210,25 +32,24 @@
     <!-- Solution -->
     <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
       <h2 class="mb-6" style="color: #38bdf8;">Решение</h2>
-      <p class="text-lg mb-6" style="color: #cbd5e1;">
-        Удобный каталог фильмов с поиском, детальной информацией и списком избранного
-      </p>
       <ul class="text-lg" style="color: #cbd5e1;">
+        <li>Удобный каталог фильмов с поиском, детальной информацией и списком избранного</li>
         <li>Интуитивный интерфейс</li>
         <li>Локальное хранение избранного</li>
         <li>Быстрый доступ к информации</li>
       </ul>
     </section>
 
-    <!-- Key Features -->
-    <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
-      <h2 class="mb-6" style="color: #38bdf8;">Ключевой функционал</h2>
-      <ul class="text-lg" style="color: #cbd5e1;">
+    <!-- Key Features (выравнивание вправо) -->
+    <section class="slide p-16 col align-right" style="background-color: #0f172a; color: #f1f5f9;">
+      <h2 class="mb-6" style="color: #38bdf8; width:100%;">Ключевой функционал</h2>
+      <ul class="text-lg" style="color: #cbd5e1; width:100%; max-width:520px; margin-left:auto;">
         <li>Просмотр популярных фильмов</li>
         <li>Поиск по названию</li>
         <li>Детальная страница фильма</li>
         <li>Список избранного</li>
       </ul>
+      <!-- Выравнено вправо с ограничением ширины, чтобы не занимало весь слайд -->
     </section>
 
     <!-- Advantages -->
@@ -252,6 +73,7 @@
           <p style="color: #cbd5e1;">Быстрая загрузка и отклик</p>
         </div>
       </div>
+      <!-- Сетка адаптивна; элементы не будут обрезаться на небольших экранах -->
     </section>
 
     <!-- User Scenario 1 -->
@@ -300,7 +122,8 @@
 +----------------------------------------+
 | Footer                                 |
 +----------------------------------------+
-        </pre>
+      </pre>
+      <!-- Карточки теперь не обрезаются благодаря min-height/overflow -->
     </section>
 
     <!-- Design: Movie Page -->
@@ -318,7 +141,7 @@
 | Похожие фильмы                         |
 | [Карточка]  [Карточка]  [Карточка]     |
 +----------------------------------------+
-        </pre>
+      </pre>
     </section>
 
     <!-- Design: Favorites -->
@@ -334,7 +157,7 @@
 +----------------------------------------+
 | Опции: Экспорт списка, Очистить всё   |
 +----------------------------------------+
-        </pre>
+      </pre>
     </section>
 
     <!-- API Overview -->
